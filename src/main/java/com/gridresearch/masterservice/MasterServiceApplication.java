@@ -1,4 +1,4 @@
-package com.grid_research.master_service;
+package com.gridresearch.masterservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
