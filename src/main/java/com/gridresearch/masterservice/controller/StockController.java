@@ -9,8 +9,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.grid_research.master_service.entity.Stock;
-import com.grid_research.master_service.service.StockService;
+import com.gridresearch.masterservice.entity.Company;
+import com.gridresearch.masterservice.entity.Promotor;
+import com.gridresearch.masterservice.entity.Stock;
+import com.gridresearch.masterservice.service.StockService;
 
 @RestController
 @RequestMapping(path = "/stock")
@@ -24,7 +26,7 @@ public class StockController {
 
 		var stocks = stockService.getStocks();
 
-		return stocks == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(stocks);
+		return stocks == null || stocks.isEmpty() ? ResponseEntity.notFound().build() : ResponseEntity.ok(stocks);
 	}
 	
 	@GetMapping(path = "/{ticker}")
@@ -33,6 +35,22 @@ public class StockController {
 		var stock = stockService.getStockByTicker(ticker);
 
 		return stock == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(stock);
+	}
+	
+	@GetMapping(path = "/{ticker}/promotors")
+	public ResponseEntity<List<Promotor>> getStocPromotorskByTicker(@PathVariable String ticker) {
+
+		var promotors = stockService.getStocPromotorskByTicker(ticker);
+
+		return promotors == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(promotors);
+	}
+	
+	@GetMapping(path = "/{ticker}/company")
+	public ResponseEntity<Company> getStockCompanyByTicker(@PathVariable String ticker) {
+
+		var company = stockService.getStockCompanyByTicker(ticker);
+
+		return company == null ? ResponseEntity.notFound().build() : ResponseEntity.ok(company);
 	}
 
 }

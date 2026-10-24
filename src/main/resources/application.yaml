@@ -1,3 +1,18 @@
 spring:
   application:
     name: master-service
+  jpa:
+    database: POSTGRESQL
+    show-sql: true
+    hibernate:
+      ddl-auto: update
+    properties:
+      hibernate:
+        format_sql: true
+  datasource:
+    platform: postgres
+    url: jdbc:postgresql://localhost:5432/grid_research?currentSchema=public
+    username: postgres
+    password: 
+    driverClassName: org.postgresql.Driver
+  
